@@ -10,7 +10,7 @@ Parameters:
   EksClusterVersion:
     Type: String
     Description: Version of EKS cluster
-    Default: '1.31'
+    Default: '1.32'
 
   EksVpcId:
     Type: String
@@ -35,12 +35,12 @@ Parameters:
   NodeGroupReleaseVersion:
     Type: String
     Description: Release version of the Node group
-    Default: "1.31.7-20250519"
+    Default: "1.32.9-20251016"
 
   BasicArmNodeGroupSize:
     Type: Number
     Description: Number of nodes in basic ARM node group
-    Default: '2'
+    Default: '6'
 
   BasicArmInstanceType:
     Type: CommaDelimitedList
@@ -50,7 +50,7 @@ Parameters:
   BasicX86NodeGroupSize:
     Type: Number
     Description: Number of nodes in basic x86 node group
-    Default: '2'
+    Default: '6'
 
   BasicX86InstanceType:
     Type: CommaDelimitedList
@@ -60,12 +60,12 @@ Parameters:
   ApplicationNodeGroupSizeMin:
     Type: Number
     Description: Minimum number of nodes in application node group
-    Default: '0'
+    Default: '3'
 
   ApplicationNodeGroupSizeMax:
     Type: Number
     Description: Maximum number of nodes in application node group
-    Default: '0'
+    Default: '6'
 
   ApplicationInstanceType:
     Type: CommaDelimitedList
@@ -85,12 +85,12 @@ Parameters:
   BenchmarkNodeGroupSizeMin:
     Type: Number
     Description: Minimum number of nodes in benchmark node group
-    Default: '0'
+    Default: '2'
 
   BenchmarkNodeGroupSizeMax:
     Type: Number
     Description: Maximum number of nodes in benchmark node group
-    Default: '0'
+    Default: '4'
 
   BenchmarkInstanceType:
     Type: CommaDelimitedList
@@ -110,7 +110,7 @@ Parameters:
   AerospikeNodeGroupSize:
     Type: Number
     Description: Number of nodes in node group for Aerospike
-    Default: '0'
+    Default: '2'
 
   AerospikeInstanceType:
     Type: CommaDelimitedList
@@ -232,7 +232,6 @@ Resources:
       NodeRole:
         !Ref EksWorkerRoleArn
       AmiType: AL2_ARM_64
-      ReleaseVersion: !Ref NodeGroupReleaseVersion
       CapacityType: ON_DEMAND #SPOT
       InstanceTypes: !Ref BasicArmInstanceType
       ScalingConfig:
@@ -254,7 +253,6 @@ Resources:
       NodeRole:
         !Ref EksWorkerRoleArn
       AmiType: AL2_x86_64
-      ReleaseVersion: !Ref NodeGroupReleaseVersion
       CapacityType: ON_DEMAND #SPOT
       InstanceTypes: !Ref BasicX86InstanceType
       ScalingConfig:
@@ -275,7 +273,6 @@ Resources:
       ClusterName: !Ref EksClusterName
       NodeRole: !Ref EksWorkerRoleArn
       AmiType: !Ref ApplicationAmiType
-      ReleaseVersion: !Ref NodeGroupReleaseVersion
       CapacityType: !Ref ApplicationCapacityType
       InstanceTypes: !Ref ApplicationInstanceType
       ScalingConfig:
@@ -303,7 +300,6 @@ Resources:
       NodeRole:
         !Ref EksWorkerRoleArn
       AmiType: !Ref BenchmarkAmiType
-      ReleaseVersion: !Ref NodeGroupReleaseVersion
       CapacityType: !Ref BenchmarkCapacityType
       InstanceTypes: !Ref BenchmarkInstanceType
       ScalingConfig:
@@ -331,7 +327,6 @@ Resources:
       NodeRole:
         !Ref EksWorkerRoleArn
       AmiType: !Ref AerospikeAmiType
-      ReleaseVersion: !Ref NodeGroupReleaseVersion
       CapacityType: !Ref AerospikeCapacityType
       InstanceTypes: !Ref AerospikeInstanceType
       ScalingConfig:

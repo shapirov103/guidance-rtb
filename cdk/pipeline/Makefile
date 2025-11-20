@@ -14,7 +14,7 @@ cdk@setup:
 cdk@deploy:
 	cd cdk/pipeline
 	source .venv/bin/activate
-	cdk deploy
+	cdk deploy --require-approval never
 
 cdk@list:
 	cd cdk/pipeline

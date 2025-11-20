@@ -223,7 +223,9 @@ eks@cleanup: ## Remove application from EKS
 	_=$(helm uninstall model 2>/dev/null)
 
 publisher-eks@provision:
-	eksctl create cluster -f ./deployment/infrastructure/publisher-eks/cluster.yaml
+	export DESIRED_VERSION="v3.17.3"
+	curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+	envsubst < deployment/infrastructure/publisher-eks/cluster.yaml | eksctl create cluster -f  -
 	kubectl apply -f deployment/infrastructure/publisher-eks/nodepool.yaml
 
 ## All variables passed to the load generator are listed here with their defaults; remember to specify duration unit.
