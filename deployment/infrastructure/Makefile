@@ -175,6 +175,13 @@ eks@provision-aws-loadbalancer-controller: ## Provision Cluster Autoscaler
   		--set clusterName=$(STACK_NAME) \
   		--set serviceAccount.create=true 
 
+eks@deploy-loadbalancers:
+# deploy external NLB to test bidder through public internet
+	kubectl apply -f deployment/infrastructure/deployment/bidder-external.yaml
+# deploy external NLB to access Grafana
+	kubectl apply -f deployment/infrastructure/deployment/grafana-external.yaml
+
+
 eks@provision-ebs-csi: ## Provision EBS CSI driver
 	helm repo add --force-update aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
 	helm upgrade --install \

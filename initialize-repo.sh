@@ -180,3 +180,6 @@ if sh -c "echo $USE_LOAD_GENERATOR | grep -q -E '^(yes)$'" ; then
     fi
 fi
 echo "[Setup] The bidder has been deployed. You can log in to the EKS cluster and access the Grafana dashboards."
+
+make eks@deploy-loadbalancers
+
